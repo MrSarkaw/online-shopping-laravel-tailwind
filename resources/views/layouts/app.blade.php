@@ -24,6 +24,9 @@
             <div class="mt-4 px-3 text-center">
                 <a href="{{route('user.index')}}">بەکارهێنەر</a>
             </div>
+            <div class="mt-4 px-3 text-center">
+                <a href="{{route('category.index')}}">بەشەکان</a>
+            </div>
             <form class="absolute bottom-5  w-full text-center" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
                 <Button class="bg-white text-green-600 w-11/12  p-2 px-4 rounded-xl">چوونەدەرەوە </Button>
