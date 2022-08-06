@@ -1,0 +1,16 @@
+body{
+    font-family: "speda";
+}
+@font-face {
+    font-family: 'speda';
+    src: url('/font/Speda-Bold.ttf');
+}
+
+*::-webkit-scrollbar{
+    width:6px;
+}
+
+*::-webkit-scrollbar-thumb{
+    width:6px;
+    background: rgb(75, 150, 75);
+}

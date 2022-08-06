@@ -11,7 +11,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function(){
 
     Route::middleware(['isAdmin'])->group(function(){
-        Route::resource('admin/user', UserController::class);
+        Route::resource('admin/user', UserController::class)->except(['show']);
     });
 
 });
