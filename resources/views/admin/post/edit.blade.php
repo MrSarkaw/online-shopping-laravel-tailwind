@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <a class="bg-green-500 px-6 py-2 rounded-xl text-white" href="{{route("post.index")}}">گەڕاندنەوە</a>
-    <div class="h-96 flex items-center justify-center">
+    <div class="min-h-96 flex items-center justify-center">
         <div  class="basis-11/12" >
                 <form action="{{route('post.update',['post'=>$data->id])}}" method="post" enctype="multipart/form-data">
                     @if (session()->has('msg'))
@@ -69,6 +69,15 @@
                             @enderror
                         </div>
 
+
+                        <div>
+                            <p>بەشەکان</p>
+                            <select multiple name="category[]" class="bg-gray-300 px-3 py-1 w-10/12 focus:outline-none rounded">
+                                @foreach ($category as $row)
+                                 <option  {{in_array($row->id, $arrID)?'selected':''}} value="{{ $row->id }}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <button class="mt-8 bg-green-500 text-white w-2/12 pt-1 rounded-xl">تازەکردنەوە</button>
