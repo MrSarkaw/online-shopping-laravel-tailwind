@@ -52,8 +52,17 @@
         </div>
         <div class="basis-3/12 text-left text-xl space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">
             <i class="fa-solid fa-cart-shopping"></i>
-            <i class="fas fa-heart"></i>
+
             @auth
+            <div class="relative">
+                <i class="fas fa-heart"></i>
+                @if(count($dtFav) > 0)
+                <p class="w-3 h-3 bg-red-500 text-white text-xs text-center rounded-full absolute -top-1">
+                    {{count($dtFav)}}
+                </p>
+                @endif
+            </div>
+
             <div onclick="showModalUser()" class="flex items-center cursor-pointer relative">
                 <p class="text-sm mt-2">{{ auth()->user()->name }}</p>
                 <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">

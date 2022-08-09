@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\FavCart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.public', function ($view) {
+            $dt = [];
+            if(Auth::user()){
+                $dt = FavCart::where('user_id', Auth::id())->get();
+            }
+
+            $view->with(['dtFav'=>$dt]);
+        });
     }
 }
