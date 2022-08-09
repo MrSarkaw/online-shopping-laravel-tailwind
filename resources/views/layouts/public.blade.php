@@ -53,7 +53,25 @@
         <div class="basis-3/12 text-left text-xl space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">
             <i class="fa-solid fa-cart-shopping"></i>
             <i class="fas fa-heart"></i>
-            <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
+            @auth
+            <div onclick="showModalUser()" class="flex items-center cursor-pointer relative">
+                <p class="text-sm mt-2">{{ auth()->user()->name }}</p>
+                <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
+
+                <div id="showModalUser" class="shadow bg-green-600 text-white hidden text-sm text-center p-2 rounded-xl w-full top-14 absolute">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button>چوونەدەرەوە</button>
+                    </form>
+                </div>
+            </div>
+            @endauth
+
+            @guest
+                <a href="{{ route('login') }}">
+                    <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
+                </a>
+            @endguest
         </div>
     </div>
     <div class="flex ">
@@ -111,5 +129,10 @@
     </div>
 </body>
 
+<script>
+    let showModalUser = ()=>{
+        document.getElementById('showModalUser').classList.toggle('hidden')
+    };
+</script>
 </html>
 
