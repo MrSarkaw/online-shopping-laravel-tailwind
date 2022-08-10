@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'index'])->name('index');
 
 Route::middleware(['auth'])->group(function(){
-    Route::post('/addto-favcart/{id}', [PublicController::class, 'addToFavCart'])->name('addToFavCart');
+    Route::post('/addto-favcart/{id}/{cart}', [PublicController::class, 'addToFavCart'])->name('addToFavCart');
     Route::middleware(['isAdmin'])->group(function(){
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('admin/user', UserController::class)->except(['show']);
@@ -20,8 +20,10 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('admin/post', PostController::class)->except(['show']);
     });
 
-    Route::resource('profile', ProfileController::class)->except(['create', 'store', 'show']);
+    Route::resource('profile', ProfileController::class)->except(['create', 'show']);
 });
+
+Route::get('/post/{id}', [PublicController::class, 'showPost'])->name('showpost');
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

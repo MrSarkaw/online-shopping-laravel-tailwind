@@ -38,10 +38,10 @@
 <body dir="rtl" class="bg-gray-100/50 ">
     <div class="flex justify-between items-center px-3 border-b-2">
         <div class="basis-7/12 flex justify-between">
-            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+            <a href="{{ route('index') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
                 <i class="fa-solid fa-shirt h-10 w-10 rounded-full bg-green-600 text-white flex items-center justify-center"></i>
                 <p class="font-bold">جلوبەرگ</p>
-            </div>
+            </a>
             <div class="space-x-5 rtl:space-x-reverse text-gray-500/70 flex items-center">
                 <a href="" class="text-gray-700 border-b-2 border-green-600 py-4">فرۆشگا</a>
                 <a href="">داواکردن</a>
@@ -63,7 +63,7 @@
 
                 <div id="favModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 -left-28 w-60 bg-white p-2 rounded-xl z-50">
                     @foreach ($dtFav as $row)
-                        <div  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
+                        <a href="{{ route('showpost', ['id'=>$row->post->id]) }}"  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
                             <div class="text-center basis-3/12">
                                 <p>{{$row->post->title}}</p>
                                 <p>{{$row->post->price}}$</p>
@@ -71,7 +71,7 @@
                              <div>
                                 <img class="w-16 h-16 object-cover rounded-lg" src="{{ asset('posts/'.$row->post->image) }}" alt="">
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
                 @endif
