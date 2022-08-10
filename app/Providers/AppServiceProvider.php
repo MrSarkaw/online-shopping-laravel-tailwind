@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.public', function ($view) {
             $dt = [];
             if(Auth::user()){
-                $dt = FavCart::where('user_id', Auth::id())->get();
+                $dt = FavCart::where('user_id', Auth::id())->with('post')->get();
             }
 
             $view->with(['dtFav'=>$dt]);

@@ -55,15 +55,29 @@
 
             @auth
             <div class="relative">
-                <i class="fas fa-heart"></i>
+                <i onclick="showModalUser('favModal')" class="fas fa-heart cursor-pointer"></i>
                 @if(count($dtFav) > 0)
                 <p class="w-3 h-3 bg-red-500 text-white text-xs text-center rounded-full absolute -top-1">
                     {{count($dtFav)}}
                 </p>
+
+                <div id="favModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 -left-28 w-60 bg-white p-2 rounded-xl z-50">
+                    @foreach ($dtFav as $row)
+                        <div  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
+                            <div class="text-center basis-3/12">
+                                <p>{{$row->post->title}}</p>
+                                <p>{{$row->post->price}}$</p>
+                            </div>
+                             <div>
+                                <img class="w-16 h-16 object-cover rounded-lg" src="{{ asset('posts/'.$row->post->image) }}" alt="">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
                 @endif
             </div>
 
-            <div onclick="showModalUser()" class="flex items-center cursor-pointer relative">
+            <div onclick="showModalUser('showModalUser')" class="flex items-center cursor-pointer relative">
                 <p class="text-sm mt-2">{{ auth()->user()->name }}</p>
                 <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
 
@@ -139,8 +153,8 @@
 </body>
 
 <script>
-    let showModalUser = ()=>{
-        document.getElementById('showModalUser').classList.toggle('hidden')
+    let showModalUser = (id)=>{
+        document.getElementById(id).classList.toggle('hidden')
     };
 </script>
 </html>
