@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('admin/post', PostController::class)->except(['show']);
     });
 
+    Route::resource('profile', ProfileController::class)->except(['create', 'store', 'show']);
 });
 
 Auth::routes();

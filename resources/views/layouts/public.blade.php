@@ -82,10 +82,11 @@
                 <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
 
                 <div id="showModalUser" class="shadow bg-green-600 text-white hidden text-sm text-center p-2 rounded-xl w-full top-14 absolute">
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('logout') }}" method="POST" class="mb-2">
                         @csrf
                         <button>چوونەدەرەوە</button>
                     </form>
+                    <a href="{{ route('profile.index') }}">پڕۆفایل</a>
                 </div>
             </div>
             @endauth
