@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,8 @@ class ProfileController extends Controller
             'comment' => 'required',
             'post_id' => 'required'
         ]);
+
+        Post::findOrFail($request->post_id);
 
         $request->merge(['user_id' => auth()->id()]);
         Comment::create($request->only('user_id', 'post_id', 'comment'));

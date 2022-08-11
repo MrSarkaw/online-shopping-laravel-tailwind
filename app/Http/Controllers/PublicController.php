@@ -21,7 +21,7 @@ class PublicController extends Controller
         $favId = [];
 
         if(Auth::user()){
-           $array =  FavCart::where('user_id', Auth::id())->get('post_id');
+           $array =  FavCart::where('user_id', Auth::id())->where('state',0)->get('post_id');
            foreach ($array as $value) {
             $favId[] = $value->post_id;
            }
