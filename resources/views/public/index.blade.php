@@ -18,7 +18,7 @@
 
 
 <div class="grid grid-cols-4 gap-10 mt-10">
-    @foreach ($posts as $row)
+    @foreach ($posts->get() as $row)
         <x-post-component :favId="$favId" :data="$row" />
     @endforeach
 </div>

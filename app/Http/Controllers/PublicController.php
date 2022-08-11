@@ -11,15 +11,24 @@ class PublicController extends Controller
 {
     public function index(Request $request){
 
-        $posts = [];
+        $posts = Post::query();
 
         if($request->q)
-        $posts = Post::where('title', 'like', '%'.$request->q.'%')->get();
-        else
-        $posts = Post::all();
+         $posts->where('title', 'like', '%'.$request->q.'%');
+
+
+         if($request->category){
+             $posts->whereHas('categories', function($q) use($request){
+                $q->whereIn('category_id', $request->category);
+             });
+         }
+
+
+         if($request->min && $request->max){
+            $posts->whereBetween('price', [$request->min, $request->max]);
+         }
 
         $favId = [];
-
         if(Auth::user()){
            $array =  FavCart::where('user_id', Auth::id())->where('state',0)->get('post_id');
            foreach ($array as $value) {

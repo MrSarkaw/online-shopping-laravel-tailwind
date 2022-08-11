@@ -51,9 +51,32 @@
             </div>
         </div>
         <div class="basis-3/12 text-left text-xl space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">
-            <i class="fa-solid fa-cart-shopping"></i>
 
             @auth
+            <div class="relative">
+                <i onclick="showModalUser('cardModal')" class="fas fa-cart-shopping cursor-pointer"></i>
+                @if(count($dtCard) > 0)
+                <p class="w-3 h-3 bg-red-500 text-white text-xs text-center rounded-full absolute -top-1">
+                    {{count($dtCard)}}
+                </p>
+
+                <div id="cardModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 -left-28 w-60 bg-white p-2 rounded-xl z-50">
+                    @foreach ($dtCard as $row)
+                        <a href="{{ route('showpost', ['id'=>$row->post->id]) }}"  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
+                            <div class="text-center basis-3/12">
+                                <p>{{$row->post->title}}</p>
+                                <p>{{$row->post->price}}$</p>
+                            </div>
+                             <div>
+                                <img class="w-16 h-16 object-cover rounded-lg" src="{{ asset('posts/'.$row->post->image) }}" alt="">
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+
+
             <div class="relative">
                 <i onclick="showModalUser('favModal')" class="fas fa-heart cursor-pointer"></i>
                 @if(count($dtFav) > 0)
@@ -105,37 +128,28 @@
             </div>
             <div class="border-b">
                 <p class="my-1 p-2 px-5">پۆلەکان</p>
-                <form action="" class="px-5 text-gray-500 text-sm space-y-4">
-                    <p>
-                        <input type="checkbox" class="accent-green-500 text-white">
-                        <span>پیاوان</span>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" class="accent-green-500 text-white">
-                        <span>ئافرەتان</span>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" class="accent-green-500 text-white">
-                        <span>منداڵان</span>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" class="accent-green-500 text-white">
-                        <span>هاوینە</span>
-                    </p>
-
-                    <button class="w-full  text-center">ئەوانی تر <i class="fa-solid fa-angle-down"></i></button>
+                <form id="form" action="{{ route('index') }}" class="px-5 text-gray-500 mb-2 text-sm space-y-4">
+                    @foreach ($category as $row)
+                        <p>
+                            @if(request('category'))
+                            <input onchange="submitForm()" {{in_array($row->id, request('category'))?'checked':''}} type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
+                            @else
+                            <input onchange="submitForm()" type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
+                            @endif
+                            <span>{{$row->name}}</span>
+                        </p>
+                    @endforeach
                 </form>
             </div>
             <div class="border-b pb-2">
-                <p class="my-2 p-2 px-5">مەودای نرخەکان</p>
-                <div class="w-8/12 mx-auto mt-2 flex flex-wrap justify-between">
-                    <input type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="کەمترین">
-                    <input type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="کەمترین">
-                    <button class="mt-4 bg-green-600 text-white px-4 py-1  rounded-xl w-full">نرخ دیاری بکە</button>
-                </div>
+                <form action="{{route('index')}}">
+                    <p class="my-2 p-2 px-5">مەودای نرخەکان</p>
+                    <div class="w-8/12 mx-auto mt-2 flex flex-wrap justify-between">
+                        <input name="min" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="کەمترین">
+                        <input name="max" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="بەرزترین">
+                        <button class="mt-4 bg-green-600 text-white px-4 py-1  rounded-xl w-full">نرخ دیاری بکە</button>
+                    </div>
+                </form>
             </div>
             <div class="border-b absolute bottom-0">
                 <div class="bg-green-600 flex items-center justify-center p-4">
@@ -157,6 +171,10 @@
     let showModalUser = (id)=>{
         document.getElementById(id).classList.toggle('hidden')
     };
+
+    let submitForm = () =>{
+        document.getElementById('form').submit();
+    }
 </script>
 </html>
 
