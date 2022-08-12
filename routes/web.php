@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
@@ -18,6 +19,7 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('admin/user', UserController::class)->except(['show']);
         Route::resource('admin/category', CategoryController::class)->except(['show']);
         Route::resource('admin/post', PostController::class)->except(['show']);
+        Route::resource('admin/transaction', TransactionController::class)->except(['create', 'edit', 'store', 'show']);
     });
 
     Route::resource('profile', ProfileController::class)->except(['create', 'show']);
