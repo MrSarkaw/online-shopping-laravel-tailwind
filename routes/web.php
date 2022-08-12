@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::resource('profile', ProfileController::class)->except(['create', 'show']);
+    Route::post('buy/{id}', [PublicController::class, 'buy'])->name('buy');
+    Route::delete('delete/{id}', [PublicController::class, 'delete'])->name('delete');
 });
 
 Route::get('/post/{id}', [PublicController::class, 'showPost'])->name('showpost');

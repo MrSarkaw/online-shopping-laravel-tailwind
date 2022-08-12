@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FavCart;
 use App\Models\Post;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,5 +68,22 @@ class PublicController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function buy($id){
+        Post::findOrFail($id);
+
+        Transaction::create([
+            'user_id' => auth()->id(),
+            'post_id' => $id
+        ]);
+
+        return redirect()->back()->with(['msg' => 'بەسەرکەوتووی کڕدرا، تکایە چاوەڕێی پەیوەندی بە']);
+    }
+
+    public function delete($id){
+        Transaction::where('id', $id)->where('state', 0)->where('user_id', auth()->id())->delete();
+
+        return redirect()->back();
     }
 }

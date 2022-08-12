@@ -1,6 +1,9 @@
 @extends('layouts.public')
 
 @section('content')
+@if(session()->get('msg'))
+    <p class="text-green-500 text-center my-4 text-xl">{{ session()->get('msg') }}</p>
+@endif
 <div class="flex flex-wrap">
     <img class="w-3/12 rounded-lg" src="{{ asset('posts/'.$data->image) }}" alt="">
     <div class="w-9/12 px-10">
@@ -18,17 +21,24 @@
                 <span class="text-sm text-gray-600 mx-2">#{{$row->category->name}}</span>
             @endforeach
         </div>
-        <div class="flex text-sm mt-10 items-center justify-between">
-            <button class="bg-green-600 text-white px-4 rounded  py-1 ">کڕین</button>
-            <form action="{{ route('addToFavCart', ['id'=>$data->id, 'cart'=>1]) }}" method="post">
-                @csrf
-                @if ($check)
-                <button class="bg-red-600 text-white px-4 rounded  py-1 "> لابردن لە عەرەبانە</button>
-                @else
-                <button class="bg-blue-600 text-white px-4 rounded  py-1 ">زیاد کردن بۆ عەرەبانە</button>
-                @endif
-            </form>
-        </div>
+
+        @auth
+            <div class="flex text-sm mt-10 items-center justify-between">
+                <form action="{{route('buy', ['id' => $data->id])}}" method="POST" id="buyForm">
+                    @csrf
+                    <input type="hidden" name="post_id" value="{{ $data->id }}">
+                    <button onclick="buy()" type="button" class="bg-green-600 text-white px-4 rounded  py-1 ">کڕین</button>
+                </form>
+                <form action="{{ route('addToFavCart', ['id'=>$data->id, 'cart'=>1]) }}" method="post">
+                    @csrf
+                    @if ($check)
+                    <button class="bg-red-600 text-white px-4 rounded  py-1 "> لابردن لە عەرەبانە</button>
+                    @else
+                    <button class="bg-blue-600 text-white px-4 rounded  py-1 ">زیاد کردن بۆ عەرەبانە</button>
+                    @endif
+                </form>
+            </div>
+        @endauth
     </div>
 </div>
 
@@ -58,5 +68,29 @@
         @endforeach
     </div>
 </div>
+
+<script>
+    let buy = ()=>{
+        Swal.fire({
+            title: 'ئایا دڵنیای لە کڕینی؟',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'بەڵێ',
+            cancelButtonText: 'نەخێر'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('buyForm').submit()
+                Swal.fire(
+                'بەسەرکەوتووی کڕدرا!',
+                '',
+                'success'
+                )
+            }
+        })
+    }
+</script>
 @endsection
 

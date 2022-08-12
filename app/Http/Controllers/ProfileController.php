@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,8 @@ class ProfileController extends Controller
 
     public function index()
     {
-
-        return view('public.user.index');
+        $posts = Transaction::where('user_id', auth()->id())->with('post')->latest()->get();
+        return view('public.user.index', compact('posts'));
     }
 
     public function edit($id)

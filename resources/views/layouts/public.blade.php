@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Fonts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -105,11 +106,11 @@
                 <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
 
                 <div id="showModalUser" class="shadow bg-green-600 text-white hidden text-sm text-center p-2 rounded-xl w-full top-14 absolute">
-                    <form action="{{ route('logout') }}" method="POST" class="mb-2">
+                    <a href="{{ route('profile.index') }}">پڕۆفایل</a>
+                    <form action="{{ route('logout') }}" method="POST" class="my-2">
                         @csrf
                         <button>چوونەدەرەوە</button>
                     </form>
-                    <a href="{{ route('profile.index') }}">پڕۆفایل</a>
                 </div>
             </div>
             @endauth
@@ -126,31 +127,29 @@
             <div class="border-b">
                 <p class="my-1  p-2 px-5">فلتەر</p>
             </div>
-            <div class="border-b">
-                <p class="my-1 p-2 px-5">پۆلەکان</p>
-                <form id="form" action="{{ route('index') }}" class="px-5 text-gray-500 mb-2 text-sm space-y-4">
-                    @foreach ($category as $row)
-                        <p>
-                            @if(request('category'))
-                            <input onchange="submitForm()" {{in_array($row->id, request('category'))?'checked':''}} type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
-                            @else
-                            <input onchange="submitForm()" type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
-                            @endif
-                            <span>{{$row->name}}</span>
-                        </p>
-                    @endforeach
-                </form>
-            </div>
-            <div class="border-b pb-2">
-                <form action="{{route('index')}}">
+            <form id="form" action="{{ route('index') }}" class="px-5 text-gray-500 mb-2 text-sm space-y-4">
+                <div class="border-b">
+                    <p class="my-1 p-2 px-5">پۆلەکان</p>
+                        @foreach ($category as $row)
+                            <p>
+                                @if(request('category'))
+                                <input onchange="submitForm()" {{in_array($row->id, request('category'))?'checked':''}} type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
+                                @else
+                                <input onchange="submitForm()" type="checkbox" name="category[]" value="{{ $row->id }}" class="accent-green-500 text-white">
+                                @endif
+                                <span>{{$row->name}}</span>
+                            </p>
+                        @endforeach
+                </div>
+                <div class="border-b pb-2">
                     <p class="my-2 p-2 px-5">مەودای نرخەکان</p>
                     <div class="w-8/12 mx-auto mt-2 flex flex-wrap justify-between">
-                        <input name="min" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="کەمترین">
-                        <input name="max" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="بەرزترین">
+                        <input value="{{ request('min') ? request('min') : '' }}" name="min" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="کەمترین">
+                        <input value="{{ request('max') ? request('max') : '' }}" name="max" type="text" class="w-4/12 px-2 py-1 text-xs text-center border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-300" placeholder="بەرزترین">
                         <button class="mt-4 bg-green-600 text-white px-4 py-1  rounded-xl w-full">نرخ دیاری بکە</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
             <div class="border-b absolute bottom-0">
                 <div class="bg-green-600 flex items-center justify-center p-4">
                     <div class="basis-1١/12 px-6 text-center py-2 rounded bg-green-500">
