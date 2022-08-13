@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::get('/post/{id}', [PublicController::class, 'showPost'])->name('showpost');
-
+Route::get('/map', [PublicController::class, 'map'])->name('map');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

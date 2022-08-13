@@ -44,11 +44,11 @@
                 <p class="font-bold">جلوبەرگ</p>
             </a>
             <div class="space-x-5 rtl:space-x-reverse text-gray-500/70 flex items-center">
-                <a href="" class="text-gray-700 border-b-2 border-green-600 py-4">فرۆشگا</a>
-                <a href="">داواکردن</a>
-                <a href="">شوێن</a>
-                <a href="">بلۆگ</a>
-                <a href="">یارمەتی</a>
+                <a href="{{ route('index') }}" class="text-gray-700  py-4 {{ Route::currentRouteName() == 'index' ? 'border-b-2 border-green-600' :'' }}">فرۆشگا</a>
+                <a href="" >زۆرترین فرۆش</a>
+                <a href="{{ route('map') }}" class="text-gray-700  py-4 {{ Route::currentRouteName() == 'map' ? 'border-b-2 border-green-600' :'' }}">شوێن</a>
+                <a href="">پەیوەندی</a>
+                <a href="">دەربارە</a>
             </div>
         </div>
         <div class="basis-3/12 text-left text-xl space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">

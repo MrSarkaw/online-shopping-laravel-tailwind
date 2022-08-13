@@ -93,4 +93,9 @@ class PublicController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function map(){
+        return view('public.map');
+    }
 }
