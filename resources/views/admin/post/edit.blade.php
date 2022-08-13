@@ -60,6 +60,17 @@
                         </div>
 
                         <div>
+                            <p>داشکاندن</p>
+                            <input value="{{$data->discount}}"  name="discount" type="text" class="bg-gray-300 px-3 py-1 focus:outline-none rounded" placeholder="">
+                            @error('discount')
+                                <p class="text-sm text-red-500 mt-2">
+                                    {{$message}}
+                                </p>
+                            @enderror
+                        </div>
+
+
+                        <div>
                             <p>وێنە</p>
                             <input name="file" type="file" class="bg-gray-300 px-3 py-1 w-10/12 focus:outline-none rounded" placeholder="">
                             @error('file')

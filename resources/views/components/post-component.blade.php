@@ -12,9 +12,16 @@
 
         <div class="absolute bottom-3 px-2 w-full space-y-5">
             <p class="text-white text-xl">{{ $row->title }}</p>
+            @if($row->discount > 0)
+            <div class="bg-yellow-800/80 text-center text-white text-sm flex items-center justify-between rounded-lg p-1 border-2 border-yellow-700 ">
+                <del>{{$row->price }} د.ع</del>
+                <span>  {{$row->price - ($row->price * $row->discount)}}  د.ع</span>
+            </div>
+            @else
             <p class="bg-green-800/80 text-center text-white text-sm rounded-lg p-1 border-2 border-green-700 ">
                 {{$row->price}} د.ع
             </p>
+            @endif
         </div>
     </div>
 </a>

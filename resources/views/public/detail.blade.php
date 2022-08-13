@@ -5,11 +5,11 @@
     <p class="text-green-500 text-center my-4 text-xl">{{ session()->get('msg') }}</p>
 @endif
 <div class="flex flex-wrap">
-    <img class="w-3/12 rounded-lg" src="{{ asset('posts/'.$data->image) }}" alt="">
+    <img class="w-3/12 rounded-lg object-cover" src="{{ asset('posts/'.$data->image) }}" alt="">
     <div class="w-9/12 px-10">
         <div class="grid grid-cols-4 gap-5">
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> تایتڵ: {{$data->title}}</p>
-            <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> نرخ: {{$data->price}}</p>
+            <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> نرخ:  {{$data->price - ($data->price * $data->discount)}}</p>
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> سایز: {{$data->size}}</p>
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> ڕەنگ: {{$data->color}}</p>
         </div>

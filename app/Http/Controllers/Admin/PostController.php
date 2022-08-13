@@ -80,7 +80,7 @@ class PostController extends Controller
 
         $request->merge(['image' => $image]);
 
-        $post->update(($request->only('title', 'price','descritpion', 'color', 'size', 'image')));
+        $post->update(($request->only('title', 'price','descritpion', 'color', 'size', 'image', 'discount')));
 
         $this->addToPostCategroy($request, $id);
 

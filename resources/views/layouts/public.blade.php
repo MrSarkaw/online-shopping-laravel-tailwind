@@ -153,9 +153,9 @@
             <div class="border-b absolute bottom-0">
                 <div class="bg-green-600 flex items-center justify-center p-4">
                     <div class="basis-1١/12 px-6 text-center py-2 rounded bg-green-500">
-                        <p class="text-center text-2xl text-white">داشکاندنی 30%</p>
-                        <p class="text-center text-xs text-gray-200">هاوڕێکانت بێبەش مەکە لەم ئۆفەرە هەر ئێستا هاوبەشی پێبکە لە کڕینی جلوبەرگ</p>
-                        <button class="bg-yellow-500 py-1 mt-4 w-8/12 mx-auto text-sm rounded-lg ">هاوبەشیکردن</button>
+                        <p class="text-center text-2xl text-white">داشکاندنەکان</p>
+                        <p class="text-center text-xs text-gray-200">بۆ بینینی داشکاندنەکانمان کلیل لەم بەتنە بکە و هاوڕێکانتی لێ ئاگاداربکە</p>
+                        <a href="{{ route('index') }}?discount=true" class="bg-yellow-500 block py-1 mt-4 w-8/12 mx-auto text-sm rounded-lg ">بینین</a>
                     </div>
                 </div>
             </div>
