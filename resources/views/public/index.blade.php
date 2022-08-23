@@ -2,7 +2,7 @@
 
 @section('content')
 <form action="{{ route('index') }}">
-    <div class="bg-gray-400/30 flex items-center justify-between p-2 px-4 rounded-2xl w-6/12">
+    <div class="bg-gray-400/30 flex items-center justify-between p-2 px-4 rounded-2xl md:w-6/12">
         <button class="focus:outline-none mt-1 text-gray-400">
             <i class="fas fa-search"></i>
         </button>
@@ -17,7 +17,7 @@
 @endif
 
 
-<div class="grid grid-cols-4 gap-10 mt-10">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-10 mt-10">
     @foreach ($posts->get() as $row)
         <x-post-component :favId="$favId" :data="$row" />
     @endforeach

@@ -4,7 +4,7 @@
 <div class="container">
     <form action="{{ route('register') }}" method="POST">
         @csrf
-        <div class="w-6/12 mx-auto  shadow bg-white p-6 space-y-4 rounded-lg">
+        <div class="md:w-6/12 mx-auto  shadow bg-white p-6 space-y-4 rounded-lg">
             <i class="fa-solid fa-shirt h-16  w-16 text-3xl mx-auto rounded-full bg-green-600 text-white flex items-center justify-center"></i>
 
             <div class="bg-gray-300 p-2 rounded-xl px-3">

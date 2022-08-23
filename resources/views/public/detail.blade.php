@@ -4,10 +4,10 @@
 @if(session()->get('msg'))
     <p class="text-green-500 text-center my-4 text-xl">{{ session()->get('msg') }}</p>
 @endif
-<div class="flex flex-wrap">
-    <img class="w-3/12 rounded-lg object-cover" src="{{ asset('posts/'.$data->image) }}" alt="">
-    <div class="w-9/12 px-10">
-        <div class="grid grid-cols-4 gap-5">
+<div class="md:flex flex-wrap space-y-2">
+    <img class="md:w-3/12 rounded-lg object-cover" src="{{ asset('posts/'.$data->image) }}" alt="">
+    <div class="md:w-9/12 md:px-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> تایتڵ: {{$data->title}}</p>
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> نرخ:  {{$data->price - ($data->price * $data->discount)}}</p>
             <p class="bg-green-500 text-center text-white pt-1 rounded-full px-2"> سایز: {{$data->size}}</p>

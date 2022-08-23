@@ -38,30 +38,34 @@
 </head>
 <body dir="rtl" class="bg-gray-100/50 ">
     <div class="flex justify-between items-center px-3 border-b-2">
-        <div class="basis-7/12 flex justify-between">
+        <div class="basis-7/12 flex md:justify-between">
             <a href="{{ route('index') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
                 <i class="fa-solid fa-shirt h-10 w-10 rounded-full bg-green-600 text-white flex items-center justify-center"></i>
                 <p class="font-bold">جلوبەرگ</p>
             </a>
-            <div class="space-x-5 rtl:space-x-reverse text-gray-500/70 flex items-center">
-                <a href="{{ route('index') }}" class="text-gray-700  py-4 {{ Route::currentRouteName() == 'index' ? 'border-b-2 border-green-600' :'' }}">فرۆشگا</a>
+            <button class="mr-4 text-xl md:hidden" onclick="showMenu()"><i class="fas fa-bars"></i></button>
+            <div id="showMenu" class="space-x-5 grid grid-cols-1 text-center  hidden  absolute top-0 left-0 w-full md:w-auto h-screen md:h-auto md:relative z-50 bg-white md:bg-transparent   rtl:space-x-reverse text-gray-500/70 md:flex items-center">
+
+               <button class="mr-4 md:hidden text-xl" onclick="showMenu()"><i class="fas fa-times"></i></button>
+
+                <a href="{{ route('index') }}" class="text-gray-700  md:py-4 {{ Route::currentRouteName() == 'index' ? 'border-b-2 border-green-600' :'' }}">فرۆشگا</a>
                 <a href="" >زۆرترین فرۆش</a>
-                <a href="{{ route('map') }}" class="text-gray-700  py-4 {{ Route::currentRouteName() == 'map' ? 'border-b-2 border-green-600' :'' }}">شوێن</a>
+                <a href="{{ route('map') }}" class="text-gray-700  md:py-4 {{ Route::currentRouteName() == 'map' ? 'border-b-2 border-green-600' :'' }}">شوێن</a>
                 <a href="">پەیوەندی</a>
                 <a href="">دەربارە</a>
             </div>
         </div>
-        <div class="basis-3/12 text-left text-xl space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">
+        <div class="basis-3/12 relative left-4 text-left text-xl space-x-2 md:space-x-5 rtl:space-x-reverse justify-end items-center flex text-gray-500">
 
             @auth
-            <div class="relative">
+            <div class="relative ">
                 <i onclick="showModalUser('cardModal')" class="fas fa-cart-shopping cursor-pointer"></i>
                 @if(count($dtCard) > 0)
                 <p class="w-3 h-3 bg-red-500 text-white text-xs text-center rounded-full absolute -top-1">
                     {{count($dtCard)}}
                 </p>
 
-                <div id="cardModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 -left-28 w-60 bg-white p-2 rounded-xl z-50">
+                <div id="cardModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 left-0 md:-left-28 w-60 bg-white p-2 rounded-xl z-50">
                     @foreach ($dtCard as $row)
                         <a href="{{ route('showpost', ['id'=>$row->post->id]) }}"  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
                             <div class="text-center basis-3/12">
@@ -78,14 +82,14 @@
             </div>
 
 
-            <div class="relative">
+            <div class="relative ">
                 <i onclick="showModalUser('favModal')" class="fas fa-heart cursor-pointer"></i>
                 @if(count($dtFav) > 0)
                 <p class="w-3 h-3 bg-red-500 text-white text-xs text-center rounded-full absolute -top-1">
                     {{count($dtFav)}}
                 </p>
 
-                <div id="favModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3 -left-28 w-60 bg-white p-2 rounded-xl z-50">
+                <div id="favModal" class="absolute top-10 max-h-48 overflow-y-scroll hidden space-y-3  left-0 md:-left-28 w-60 bg-white p-2 rounded-xl z-50">
                     @foreach ($dtFav as $row)
                         <a href="{{ route('showpost', ['id'=>$row->post->id]) }}"  class="flex shadow rounded-lg pt-1 items-center justify-between text-xs px-2">
                             <div class="text-center basis-3/12">
@@ -105,7 +109,7 @@
                 <p class="text-sm mt-2">{{ auth()->user()->name }}</p>
                 <img src="https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg" class="w-12 rounded-full" alt="">
 
-                <div id="showModalUser" class="shadow bg-green-600 text-white hidden text-sm text-center p-2 rounded-xl w-full top-14 absolute">
+                <div id="showModalUser" class="shadow bg-green-600 text-white hidden text-sm text-center p-2 -left-4 md:left-0 rounded-xl w-[120px] top-8  md:top-14 absolute">
                     <a href="{{ route('profile.index') }}">پڕۆفایل</a>
                     <form action="{{ route('logout') }}" method="POST" class="my-2">
                         @csrf
@@ -122,10 +126,11 @@
             @endguest
         </div>
     </div>
-    <div class="flex ">
-        <div class="basis-3/12  border-l-2 relative">
-            <div class="border-b">
+    <div class="md:flex ">
+        <div id="showFilter" class="w-full absolute h-screen z-50 bg-white md:bg-transparent hidden md:block md:basis-3/12  border-l-2 md:relative">
+            <div class="border-b flex items-center justify-between">
                 <p class="my-1  p-2 px-5">فلتەر</p>
+                <button onclick="showFilter()" onclick=""><i class="fas fa-times mx-5 text-2xl md:hidden"></i></button>
             </div>
             <form id="form" action="{{ route('index') }}" class="px-5 text-gray-500 mb-2 text-sm space-y-4">
                 <div class="border-b">
@@ -160,7 +165,11 @@
                 </div>
             </div>
         </div>
-        <div class="basis-9/12 p-4 overflow-y-scroll h-[610px]">
+        <div class="w-full md:basis-9/12 p-4 overflow-y-scroll h-[610px]">
+            {{-- @if(Route::CurrenRouteName()) --}}
+            @if (Route::currentRouteName() == 'index')
+            <button onclick="showFilter()" onclick=""><i class="fas fa-filter text-2xl md:hidden"></i></button>
+            @endif
             @yield('content')
         </div>
     </div>
@@ -173,6 +182,15 @@
 
     let submitForm = () =>{
         document.getElementById('form').submit();
+    }
+
+    let showFilter = () =>{
+        document.getElementById('showFilter').classList.toggle('hidden');
+    }
+
+
+    let showMenu = () =>{
+        document.getElementById('showMenu').classList.toggle('hidden');
     }
 </script>
 </html>
