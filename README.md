@@ -1,3 +1,7 @@
+<img src="https://github.com/MrSarkaw/online-shopping-laravel-tailwind/blob/0d6284ed3d5734c888ffd26084c05106f942de67/public/299288811_2370122129803379_6943541830231508961_n.jpg" />
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
